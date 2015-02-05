@@ -1,29 +1,11 @@
-/**
- * This file is provided by Facebook for testing and evaluation purposes
- * only. Facebook reserves all rights not expressly granted.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * FACEBOOK BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN
- * AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
- * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
-
 var ChatAppDispatcher = require('../dispatcher/ChatAppDispatcher');
-var ChatConstants = require('../constants/ChatConstants');
 var ChatMessageUtils = require('../utils/ChatMessageUtils');
-var EventEmitter = require('events').EventEmitter;
-var assign = require('object-assign');
-
-var ActionTypes = ChatConstants.ActionTypes;
-var CHANGE_EVENT = 'change';
+var ActionTypes = require('../ActionTypes');
 
 var _currentID = null;
 var _threads = {};
 
-var ThreadStore = assign({}, EventEmitter.prototype, {
-
+var ThreadStore = SubUnit.createStore({
   init: function(rawMessages) {
     rawMessages.forEach(function (message) {
       var threadID = message.threadID;
@@ -45,36 +27,12 @@ var ThreadStore = assign({}, EventEmitter.prototype, {
 
     _threads[_currentID].lastMessage.isRead = true;
   },
-
-  emitChange: function() {
-    this.emit(CHANGE_EVENT);
-  },
-
-  /**
-   * @param {function} callback
-   */
-  addChangeListener: function(callback) {
-    this.on(CHANGE_EVENT, callback);
-  },
-
-  /**
-   * @param {function} callback
-   */
-  removeChangeListener: function(callback) {
-    this.removeListener(CHANGE_EVENT, callback);
-  },
-
-  /**
-   * @param {string} id
-   */
   get: function(id) {
     return _threads[id];
   },
-
   getAll: function() {
     return _threads;
   },
-
   getAllChrono: function() {
     var orderedThreads = [];
     for (var id in _threads) {
@@ -91,15 +49,12 @@ var ThreadStore = assign({}, EventEmitter.prototype, {
     });
     return orderedThreads;
   },
-
   getCurrentID: function() {
     return _currentID;
   },
-
   getCurrent: function() {
     return this.get(this.getCurrentID());
   }
-
 });
 
 ThreadStore.dispatchToken = ChatAppDispatcher.register(function (payload) {
@@ -118,8 +73,7 @@ ThreadStore.dispatchToken = ChatAppDispatcher.register(function (payload) {
       ThreadStore.emitChange();
       break;
 
-    default:
-      // do nothing
+    default: // do nothing
   }
 
 });
