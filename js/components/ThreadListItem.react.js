@@ -10,7 +10,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-var ChatThreadActionCreators = require('../actions/ChatThreadActionCreators');
+var ChatThreadActionCreators = require('../actions/thread');
 var React = require('react');
 var cx = require('react/lib/cx');
 

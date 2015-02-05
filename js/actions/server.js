@@ -2,7 +2,6 @@ var ChatAppDispatcher = require('../dispatcher/ChatAppDispatcher');
 var ActionTypes = require('../ActionTypes');
 
 module.exports = {
-
   receiveAll: function(rawMessages) {
     ChatAppDispatcher.serverAction({
       type: ActionTypes.RECEIVE_RAW_MESSAGES,
@@ -16,5 +15,4 @@ module.exports = {
       rawMessage: createdMessage
     });
   }
-
 };

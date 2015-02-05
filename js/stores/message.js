@@ -1,6 +1,6 @@
 var ChatAppDispatcher = require('../dispatcher/ChatAppDispatcher');
 var ChatMessageUtils = require('../utils/ChatMessageUtils');
-var ThreadStore = require('../stores/ThreadStore');
+var ThreadStore = require('../stores/thread');
 var ActionTypes = require('../ActionTypes');
 
 var _messages = {};

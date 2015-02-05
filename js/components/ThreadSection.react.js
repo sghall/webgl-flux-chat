@@ -11,10 +11,10 @@
  */
 
 var React = require('react');
-var MessageStore = require('../stores/MessageStore');
+var MessageStore = require('../stores/message');
 var ThreadListItem = require('../components/ThreadListItem.react');
-var ThreadStore = require('../stores/ThreadStore');
-var UnreadThreadStore = require('../stores/UnreadThreadStore');
+var ThreadStore = require('../stores/thread');
+var UnreadThreadStore = require('../stores/unread');
 
 function getStateFromStores() {
   return {

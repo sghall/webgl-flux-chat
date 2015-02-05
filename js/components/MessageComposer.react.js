@@ -10,7 +10,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-var ChatMessageActionCreators = require('../actions/ChatMessageActionCreators');
+var ChatMessageActionCreators = require('../actions/message');
 var React = require('react');
 
 var ENTER_KEY_CODE = 13;
