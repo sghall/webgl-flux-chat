@@ -1,16 +1,15 @@
-var ChatServerActionCreators = require('../actions/server');
-var ChatAppDispatcher = require('../dispatcher/ChatAppDispatcher');
-var MessageStore = require('../stores/message');
-
-var ActionTypes = require('../ActionTypes');
+var serverActions = require('../actions/server');
+var dispatcher    = require('../dispatcher');
+var messageStore  = require('../stores/message');
+var actionTypes   = require('../actionTypes');
 
 module.exports = {
   createMessage: function(text) {
-    ChatAppDispatcher.viewAction({
-      type: ActionTypes.CREATE_MESSAGE,
+    dispatcher.viewAction({
+      type: actionTypes.CREATE_MESSAGE,
       text: text
     });
-    var message = MessageStore.getCreatedMessageData(text);
+    var message = messageStore.getCreatedMessageData(text);
     saveMessage(message);
   }
 };
@@ -34,6 +33,6 @@ function saveMessage(message, threadName) {
 
   // simulate success callback
   setTimeout(function() {
-    ChatServerActionCreators.receiveCreatedMessage(createdMessage);
+    serverActions.receiveCreatedMessage(createdMessage);
   }, 0);
 }

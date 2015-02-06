@@ -1,16 +1,16 @@
-var ChatAppDispatcher = require('../dispatcher/ChatAppDispatcher');
-var ChatMessageUtils = require('../utils/ChatMessageUtils');
-var ThreadStore = require('../stores/thread');
-var ActionTypes = require('../ActionTypes');
+var dispatcher  = require('../dispatcher');
+var utils       = require('../utils');
+var threadStore = require('../stores/thread');
+var actionTypes = require('../actionTypes');
 
 var _messages = {};
 
 function _addMessages(rawMessages) {
   rawMessages.forEach(function (message) {
     if (!_messages[message.id]) {
-      _messages[message.id] = ChatMessageUtils.convertRawMessage(
+      _messages[message.id] = utils.convertRawMessage(
         message,
-        ThreadStore.getCurrentID()
+        threadStore.getCurrentID()
       );
     }
   });
@@ -49,13 +49,13 @@ var MessageStore = SubUnit.createStore({
     return threadMessages;
   },
   getAllForCurrentThread: function() {
-    return this.getAllForThread(ThreadStore.getCurrentID());
+    return this.getAllForThread(threadStore.getCurrentID());
   },
   getCreatedMessageData: function(text) {
     var timestamp = Date.now();
     return {
       id: 'm_' + timestamp,
-      threadID: ThreadStore.getCurrentID(),
+      threadID: threadStore.getCurrentID(),
       authorName: 'Steve', // hard coded for the example
       date: new Date(timestamp),
       text: text,
@@ -64,27 +64,27 @@ var MessageStore = SubUnit.createStore({
   }
 });
 
-MessageStore.dispatchToken = ChatAppDispatcher.register(function (payload) {
+MessageStore.dispatchToken = dispatcher.register(function (payload) {
   var action = payload.action;
 
   switch(action.type) {
 
-    case ActionTypes.CLICK_THREAD:
-      ChatAppDispatcher.waitFor([ThreadStore.dispatchToken]);
-      _markAllInThreadRead(ThreadStore.getCurrentID());
+    case actionTypes.CLICK_THREAD:
+      dispatcher.waitFor([threadStore.dispatchToken]);
+      _markAllInThreadRead(threadStore.getCurrentID());
       MessageStore.emitChange();
       break;
 
-    case ActionTypes.CREATE_MESSAGE:
+    case actionTypes.CREATE_MESSAGE:
       var message = MessageStore.getCreatedMessageData(action.text);
       _messages[message.id] = message;
       MessageStore.emitChange();
       break;
 
-    case ActionTypes.RECEIVE_RAW_MESSAGES:
+    case actionTypes.RECEIVE_RAW_MESSAGES:
       _addMessages(action.rawMessages);
-      ChatAppDispatcher.waitFor([ThreadStore.dispatchToken]);
-      _markAllInThreadRead(ThreadStore.getCurrentID());
+      dispatcher.waitFor([threadStore.dispatchToken]);
+      _markAllInThreadRead(threadStore.getCurrentID());
       MessageStore.emitChange();
       break;
 

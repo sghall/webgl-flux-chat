@@ -1,6 +1,6 @@
-var ChatAppDispatcher = require('../dispatcher/ChatAppDispatcher');
-var ChatMessageUtils = require('../utils/ChatMessageUtils');
-var ActionTypes = require('../ActionTypes');
+var dispatcher  = require('../dispatcher');
+var utils       = require('../utils');
+var actionTypes = require('../actionTypes');
 
 var _currentID = null;
 var _threads = {};
@@ -16,7 +16,7 @@ var ThreadStore = SubUnit.createStore({
       _threads[threadID] = {
         id: threadID,
         name: message.threadName,
-        lastMessage: ChatMessageUtils.convertRawMessage(message, _currentID)
+        lastMessage: utils.convertRawMessage(message, _currentID)
       };
     }, this);
 
@@ -57,18 +57,18 @@ var ThreadStore = SubUnit.createStore({
   }
 });
 
-ThreadStore.dispatchToken = ChatAppDispatcher.register(function (payload) {
+ThreadStore.dispatchToken = dispatcher.register(function (payload) {
   var action = payload.action;
 
   switch(action.type) {
 
-    case ActionTypes.CLICK_THREAD:
+    case actionTypes.CLICK_THREAD:
       _currentID = action.threadID;
       _threads[_currentID].lastMessage.isRead = true;
       ThreadStore.emitChange();
       break;
 
-    case ActionTypes.RECEIVE_RAW_MESSAGES:
+    case actionTypes.RECEIVE_RAW_MESSAGES:
       ThreadStore.init(action.rawMessages);
       ThreadStore.emitChange();
       break;
