@@ -1,7 +1,7 @@
-var dispatcher  = require('../dispatcher');
-var utils       = require('../utils');
-var threadStore = require('../stores/thread');
-var actionTypes = require('../actionTypes');
+import { dispatcher } from '../dispatcher';
+import { utils } from '../utils';
+import { threadStore } from '../stores/thread';
+import { actionTypes } from '../actionTypes';
 
 var _messages = {};
 
@@ -24,21 +24,21 @@ function _markAllInThreadRead(threadID) {
   }
 }
 
-var MessageStore = SubUnit.createStore({
-  get: function(id) {
+export var messageStore = SubUnit.createStore({
+  get: function (id) {
     return _messages[id];
   },
-  getAll: function() {
+  getAll: function () {
     return _messages;
   },
-  getAllForThread: function(threadID) {
+  getAllForThread: function (threadID) {
     var threadMessages = [];
     for (var id in _messages) {
       if (_messages[id].threadID === threadID) {
         threadMessages.push(_messages[id]);
       }
     }
-    threadMessages.sort(function(a, b) {
+    threadMessages.sort(function (a, b) {
       if (a.date < b.date) {
         return -1;
       } else if (a.date > b.date) {
@@ -48,10 +48,10 @@ var MessageStore = SubUnit.createStore({
     });
     return threadMessages;
   },
-  getAllForCurrentThread: function() {
+  getAllForCurrentThread: function () {
     return this.getAllForThread(threadStore.getCurrentID());
   },
-  getCreatedMessageData: function(text) {
+  getCreatedMessageData: function (text) {
     var timestamp = Date.now();
     return {
       id: 'm_' + timestamp,
@@ -64,7 +64,7 @@ var MessageStore = SubUnit.createStore({
   }
 });
 
-MessageStore.dispatchToken = dispatcher.register(function (payload) {
+messageStore.dispatchToken = dispatcher.register(function (payload) {
   var action = payload.action;
 
   switch(action.type) {
@@ -72,25 +72,23 @@ MessageStore.dispatchToken = dispatcher.register(function (payload) {
     case actionTypes.CLICK_THREAD:
       dispatcher.waitFor([threadStore.dispatchToken]);
       _markAllInThreadRead(threadStore.getCurrentID());
-      MessageStore.emitChange();
+      messageStore.emitChange();
       break;
 
     case actionTypes.CREATE_MESSAGE:
-      var message = MessageStore.getCreatedMessageData(action.text);
+      var message = messageStore.getCreatedMessageData(action.text);
       _messages[message.id] = message;
-      MessageStore.emitChange();
+      messageStore.emitChange();
       break;
 
     case actionTypes.RECEIVE_RAW_MESSAGES:
       _addMessages(action.rawMessages);
       dispatcher.waitFor([threadStore.dispatchToken]);
       _markAllInThreadRead(threadStore.getCurrentID());
-      MessageStore.emitChange();
+      messageStore.emitChange();
       break;
 
     default: // do nothing
   }
 
 });
-
-module.exports = MessageStore;

@@ -1,23 +1,15 @@
 var ReactPropTypes = React.PropTypes;
-var MessageListItem = React.createClass({
 
+export var MessageListItem = React.createClass({
   propTypes: {
     message: ReactPropTypes.object
   },
-
   render: function() {
     var message = this.props.message;
-    return (
-      <li className="message-list-item">
-        <h5 className="message-author-name">{message.authorName}</h5>
-        <div className="message-time">
-          {message.date.toLocaleTimeString()}
-        </div>
-        <div className="message-text">{message.text}</div>
-      </li>
+    return React.createElement("li", {className: "message-list-item"}, 
+      React.createElement("h5", {className: "message-author-name"}, message.authorName), 
+      React.createElement("div", {className: "message-time"}, message.date.toLocaleTimeString()), 
+      React.createElement("div", {className: "message-text"}, message.text)
     );
   }
-
 });
-
-module.exports = MessageListItem;

@@ -1,11 +1,11 @@
-var dispatcher  = require('../dispatcher');
-var utils       = require('../utils');
-var actionTypes = require('../actionTypes');
+import { dispatcher } from '../dispatcher';
+import { utils } from '../utils';
+import { actionTypes } from '../actionTypes';
 
 var _currentID = null;
 var _threads = {};
 
-var ThreadStore = SubUnit.createStore({
+export var threadStore = SubUnit.createStore({
   init: function(rawMessages) {
     rawMessages.forEach(function (message) {
       var threadID = message.threadID;
@@ -57,7 +57,7 @@ var ThreadStore = SubUnit.createStore({
   }
 });
 
-ThreadStore.dispatchToken = dispatcher.register(function (payload) {
+threadStore.dispatchToken = dispatcher.register(function (payload) {
   var action = payload.action;
 
   switch(action.type) {
@@ -65,17 +65,14 @@ ThreadStore.dispatchToken = dispatcher.register(function (payload) {
     case actionTypes.CLICK_THREAD:
       _currentID = action.threadID;
       _threads[_currentID].lastMessage.isRead = true;
-      ThreadStore.emitChange();
+      threadStore.emitChange();
       break;
 
     case actionTypes.RECEIVE_RAW_MESSAGES:
-      ThreadStore.init(action.rawMessages);
-      ThreadStore.emitChange();
+      threadStore.init(action.rawMessages);
+      threadStore.emitChange();
       break;
 
     default: // do nothing
   }
-
 });
-
-module.exports = ThreadStore;

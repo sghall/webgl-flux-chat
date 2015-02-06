@@ -1,16 +1,11 @@
-var MessageSection = require('./MessageSection.react');
-var ThreadSection = require('./ThreadSection.react');
+import { MessageSection } from './MessageSection.react';
+import { ThreadSection } from './ThreadSection.react';
 
-var ChatApp = React.createClass({
+export var ChatApp = React.createClass({
   render: function() {
-    return (
-      <div className="chatapp">
-        <ThreadSection />
-        <MessageSection />
-      </div>
+    return React.createElement("div", {className: "chatapp"}, 
+      React.createElement(ThreadSection, null), 
+      React.createElement(MessageSection, null)
     );
   }
-
 });
-
-module.exports = ChatApp;

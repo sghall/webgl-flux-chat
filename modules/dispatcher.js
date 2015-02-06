@@ -1,2 +1,1 @@
-var ChatAppDispatcher = SubUnit.createDispatcher();
-module.exports = ChatAppDispatcher;
+export var dispatcher = SubUnit.createDispatcher();

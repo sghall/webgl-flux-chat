@@ -1,9 +1,9 @@
-var serverActions = require('../actions/server');
-var dispatcher    = require('../dispatcher');
-var messageStore  = require('../stores/message');
-var actionTypes   = require('../actionTypes');
+import { serverActions } from '../actions/server';
+import { dispatcher } from '../dispatcher';
+import { messageStore } from '../stores/message';
+import { actionTypes } from '../actionTypes';
 
-module.exports = {
+export var messageActions = {
   createMessage: function(text) {
     dispatcher.viewAction({
       type: actionTypes.CREATE_MESSAGE,

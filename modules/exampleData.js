@@ -1,4 +1,4 @@
-module.exports = {
+export var exampleData = {
   init: function() {
     localStorage.clear();
     localStorage.setItem('messages', JSON.stringify([

@@ -1,7 +1,7 @@
-var dispatcher  = require('../dispatcher');
-var actionTypes = require('../actionTypes');
+import { dispatcher } from '../dispatcher';
+import { actionTypes } from '../actionTypes';
 
-module.exports = {
+export var threadActions = {
   clickThread: function(threadID) {
     dispatcher.viewAction({
       type: actionTypes.CLICK_THREAD,

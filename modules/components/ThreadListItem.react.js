@@ -1,38 +1,28 @@
-var ChatThreadActionCreators = require('../actions/thread');
+import { threadActions } from '../actions/thread';
+
 var ReactPropTypes = React.PropTypes;
 
-var ThreadListItem = React.createClass({
-
+export var ThreadListItem = React.createClass({
   propTypes: {
     thread: ReactPropTypes.object,
     currentThreadID: ReactPropTypes.string
   },
-
   render: function() {
     var thread = this.props.thread;
     var lastMessage = thread.lastMessage;
-    return (
-      <li
-        className={cx({
-          'thread-list-item': true,
-          'active': thread.id === this.props.currentThreadID
-        })}
-        onClick={this._onClick}>
-        <h5 className="thread-name">{thread.name}</h5>
-        <div className="thread-time">
-          {lastMessage.date.toLocaleTimeString()}
-        </div>
-        <div className="thread-last-message">
-          {lastMessage.text}
-        </div>
-      </li>
+    return React.createElement("li", {
+      className: cx({
+        'thread-list-item': true,
+        'active': thread.id === this.props.currentThreadID
+      }), onClick: this._onClick}, 
+      React.createElement("h5", {className: "thread-name"}, thread.name), 
+      React.createElement("div", {className: "thread-time"},lastMessage.date.toLocaleTimeString()), 
+      React.createElement("div", {className: "thread-last-message"}, lastMessage.text)
     );
   },
-
   _onClick: function() {
-    ChatThreadActionCreators.clickThread(this.props.thread.id);
+    threadActions.clickThread(this.props.thread.id);
   }
-
 });
 
 function cx(classNames) {
@@ -44,5 +34,3 @@ function cx(classNames) {
     return Array.prototype.join.call(arguments, ' ');
   }
 }
-
-module.exports = ThreadListItem;

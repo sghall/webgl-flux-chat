@@ -1,9 +1,9 @@
-var dispatcher   = require('../dispatcher');
-var messageStore = require('../stores/message');
-var threadStore  = require('../stores/thread');
-var actionTypes  = require('../actionTypes');
+import { dispatcher } from '../dispatcher';
+import { messageStore } from '../stores/message';
+import { threadStore } from '../stores/thread';
+import { actionTypes } from '../actionTypes';
 
-var UnreadthreadStore = SubUnit.createStore({
+export var unreadStore = SubUnit.createStore({
   getCount: function() {
     var threads = threadStore.getAll();
     var unreadCount = 0;
@@ -16,7 +16,7 @@ var UnreadthreadStore = SubUnit.createStore({
   }
 });
 
-UnreadthreadStore.dispatchToken = dispatcher.register(function (payload) {
+unreadStore.dispatchToken = dispatcher.register(function (payload) {
   dispatcher.waitFor([
     threadStore.dispatchToken,
     messageStore.dispatchToken
@@ -26,15 +26,13 @@ UnreadthreadStore.dispatchToken = dispatcher.register(function (payload) {
   switch (action.type) {
 
     case actionTypes.CLICK_THREAD:
-      UnreadthreadStore.emitChange();
+      unreadStore.emitChange();
       break;
 
     case actionTypes.RECEIVE_RAW_MESSAGES:
-      UnreadthreadStore.emitChange();
+      unreadStore.emitChange();
       break;
 
     default: // do nothing
   }
 });
-
-module.exports = UnreadthreadStore;
