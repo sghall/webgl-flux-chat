@@ -1,0 +1,21 @@
+{
+  "name": "webgl-flux-chat",
+  "version": "0.0.0",
+  "homepage": "https://github.com/sghall/webgl-flux-chat",
+  "authors": [
+    "shall <hall.steven.g@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "react": "~0.12.2",
+    "d3": "~3.5.3",
+    "subunit": "~0.2.3"
+  }
+}
