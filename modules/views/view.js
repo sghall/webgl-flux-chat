@@ -10,18 +10,40 @@ function getStateFromStores() {
 }
 
 export var view = SubUnit.createView(scene, {
-  getInitialState: function() {
+  getInitialState: function () {
     return getStateFromStores();
   },
-  viewDidMount: function() {
+  viewDidMount: function () {
     messageStore.addChangeListener(onStoreUpdate);
     threadStore.addChangeListener(onStoreUpdate);
   },
-  viewWillUnmount: function() {
+  viewWillUnmount: function () {
     messageStore.removeChangeListener(onStoreUpdate);
     threadStore.removeChangeListener(onStoreUpdate);
   },
-  render: function() {
+  render: function () {
+    // var root = SubUnit.object(this.root);
+
+    var boxes = this.root.selectAll("box.mesh")
+      .data(this.state.messages, function (d) { return d.id; })
+
+    boxes
+      .attr("material", new THREE.MeshPhongMaterial({color: 'blue'}))
+      .each(function (d, i) {
+        this.position.set(25, i * 110, 0);
+      });
+
+    boxes.enter().append("mesh")
+      .attr("tags", "box mesh")
+      .attr("geometry", new THREE.BoxGeometry(1, 1, 1))
+      .attr("material", new THREE.MeshPhongMaterial({color: 'red'}))
+      .each(function (d, i) {
+        this.scale.set(600, 100, 2)
+        this.position.set(25, i * 110, 0);
+      });
+
+    boxes.exit().remove()
+
     console.log("view.render root: ", this.root)
     console.log("view.render data: ", this.state)
   },
