@@ -15,6 +15,7 @@ export var messageActions = {
 };
 
 function saveMessage(message, threadName) {
+
   // simulate writing to a database
   var rawMessages = JSON.parse(localStorage.getItem('messages'));
   var timestamp = Date.now();

@@ -8,6 +8,7 @@
   <body>
     <section id="react"></section>
     <script src="bower_components/react/react.js"></script>
+    <script src="bower_components/threejs/build/three.js"></script>
     <script src="../subunit/dist/subunit.js"></script>
     <script src="traceur/traceur.js"></script>
     <script src="traceur/bootstrap.js"></script>
@@ -15,6 +16,9 @@
       import { ChatApp } from './modules/components/ChatApp.react';
       import { exampleData } from './modules/exampleData';
       import { serverActions } from './modules/actions/server';
+      import { view } from './modules/views/view';
+
+      console.log("imported view", view);
 
       exampleData.init(); // load example data into localstorage
 

@@ -1,0 +1,1 @@
+export var scene = new THREE.Scene();
