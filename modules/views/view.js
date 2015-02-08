@@ -22,15 +22,17 @@ export var view = SubUnit.createView(scene, {
     threadStore.removeChangeListener(onStoreUpdate);
   },
   render: function () {
-    // var root = SubUnit.object(this.root);
 
     var boxes = this.root.selectAll("box.mesh")
-      .data(this.state.messages, function (d) { return d.id; })
+      .data(this.state.messages, function (d) { return d.id + d.threadID; })
 
     boxes
       .attr("material", new THREE.MeshPhongMaterial({color: 'blue'}))
       .each(function (d, i) {
-        this.position.set(25, i * 110, 0);
+        this.position.set(275, 500 - (i * 150), 0);
+        if (i >= 6) {
+          this.rotation.set(Math.PI / 3, 0, 0);
+        }
       });
 
     boxes.enter().append("mesh")
@@ -38,8 +40,11 @@ export var view = SubUnit.createView(scene, {
       .attr("geometry", new THREE.BoxGeometry(1, 1, 1))
       .attr("material", new THREE.MeshPhongMaterial({color: 'red'}))
       .each(function (d, i) {
-        this.scale.set(600, 100, 2)
-        this.position.set(25, i * 110, 0);
+        this.scale.set(1100, 145, 2)
+        this.position.set(275, 500 - (i * 150), 0);
+        if (i >= 6) {
+          this.rotation.set(Math.PI / 3, 0, 0);
+        }
       });
 
     boxes.exit().remove()
