@@ -7,7 +7,7 @@ export function renderMessages() {
 
   var data = this.state;
   var list = data.messages.reverse().slice(0, 6).sort(function (a, b) {
-    return a.date > b.date;
+    return (a.date < b.date) ? -1 : (a.date > b.date) ? 1 : 0;
   });
 
   var messages = this.root.selectAll("message.node")
@@ -30,13 +30,13 @@ export function renderMessages() {
 
       new TWEEN.Tween(this.rotation)
         .easing(TWEEN.Easing.Cubic.InOut)
-        .to({z: 0}, 500)
+        .to({z: 0}, 400)
         .start();
 
       new TWEEN.Tween(this.scale)
         .easing(TWEEN.Easing.Cubic.InOut)
         .delay(400)
-        .to({y: 0.75}, 300)
+        .to({y: 0.75}, 400)
         .start();
     });
 

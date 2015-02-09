@@ -37,13 +37,13 @@ export function renderThreads() {
 
       new TWEEN.Tween(this.rotation)
         .easing(TWEEN.Easing.Cubic.InOut)
-        .to({z: 0}, 500)
+        .to({z: 0}, 400)
         .start();
 
       new TWEEN.Tween(this.scale)
         .easing(TWEEN.Easing.Cubic.InOut)
         .delay(400)
-        .to({y: 0.75}, 300)
+        .to({y: 0.75}, 400)
         .start();
     });
 

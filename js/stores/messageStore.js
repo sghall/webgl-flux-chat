@@ -55,7 +55,7 @@ export var messageStore = SubUnit.createStore({
     return {
       id: 'm_' + timestamp,
       threadID: threadStore.getCurrentID(),
-      authorName: 'Bill', // hard coded for the example
+      authorName: 'Vincent', // hard coded for the example
       date: new Date(timestamp),
       text: text,
       isRead: true
