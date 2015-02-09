@@ -11,3 +11,5 @@ Clone the repo and bower install.
 This is an example application we've created to show an example of how a Flux
 app is structured, and how you might use waitFor to make sure the Stores'
 registered callbacks are called in the correct order.
+
+Find out more about FLux, checkout the overview [here](http://facebook.github.io/flux/docs/overview.html)
