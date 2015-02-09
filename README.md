@@ -6,6 +6,8 @@ This project started as a fork of FaceBook's awesome demos of [flux](https://git
 
 Clone the repo and bower install.
 
+### About the chat app demo from the FaceBook team...
+
 This is an example application we've created to show an example of how a Flux
 app is structured, and how you might use waitFor to make sure the Stores'
 registered callbacks are called in the correct order.
