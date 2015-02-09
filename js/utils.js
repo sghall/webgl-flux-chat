@@ -10,6 +10,12 @@ export function convertRawMessage(rawMessage, currentThreadID) {
   };
 }
 
+export var color = SubUnit.cache(10, function (color) {
+  return new THREE.MeshPhongMaterial({color: color});
+});
+
+export var text = SubUnit.cache(100, wrapText);
+
 export function wrapText(text, color, points, maxWidth) {
 
   text = text.length > 140 ? text.slice(0,140) + "...": text;

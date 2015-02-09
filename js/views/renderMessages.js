@@ -1,12 +1,6 @@
-import { wrapText } from '../utils';
+import { wrapText, color, text } from '../utils';
 
 var messageGeometry = new THREE.BoxGeometry(100, 30, 5);
-
-var color = SubUnit.cache(10, function (color) {
-  return new THREE.MeshPhongMaterial({color: color});
-});
-
-var text = SubUnit.cache(100, wrapText);
 
 export function renderMessages() {
   var msgWidth = 1800;
@@ -18,9 +12,6 @@ export function renderMessages() {
 
   var messages = this.root.selectAll("message.node")
     .data(list, function (d) { return d.id; })
-
-  messages.selectAll("backing.inner")
-    .attr("material", color('#fff'));
 
   messages.each(function (d, i) {
     new TWEEN.Tween(this.position)
@@ -45,7 +36,7 @@ export function renderMessages() {
       new TWEEN.Tween(this.scale)
         .easing(TWEEN.Easing.Cubic.InOut)
         .delay(400)
-        .to({y: 0.75}, 200)
+        .to({y: 0.75}, 300)
         .start();
     });
 
@@ -84,7 +75,7 @@ export function renderMessages() {
       });
       this.geometry = new THREE.PlaneBufferGeometry(msgWidth, image.height);
       this.scale.set(0.75, 0.75, 0.75);
-      this.position.set(1000, 30, 500);
+      this.position.set(1050, 30, 500);
     });
 
   nodes.append("mesh")

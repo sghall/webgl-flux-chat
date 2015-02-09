@@ -1,6 +1,8 @@
+import { scene } from '../scene';
 import { messageStore } from '../stores/messageStore';
 import { threadStore } from '../stores/threadStore';
 import { unreadStore } from '../stores/unreadStore';
+import { renderThreads } from './renderThreads';
 
 function getStateFromStores() {
   return {
@@ -10,15 +12,15 @@ function getStateFromStores() {
   };
 }
 
-export var threadsView = SubUnit.createView({
+export var threadsView = SubUnit.createView(scene, {
   getInitialState: function() {
     return getStateFromStores();
   },
-  componentDidMount: function() {
+  viewDidMount: function() {
     threadStore.addChangeListener(onStoreChange);
     unreadStore.addChangeListener(onStoreChange);
   },
-  componentWillUnmount: function() {
+  viewWillUnmount: function() {
     threadStore.removeChangeListener(onStoreChange);
     unreadStore.removeChangeListener(onStoreChange);
   },
@@ -27,5 +29,5 @@ export var threadsView = SubUnit.createView({
 
 
 function onStoreChange() {
-  ThreadView.setState(getStateFromStores());
+  threadsView.setState(getStateFromStores());
 }
