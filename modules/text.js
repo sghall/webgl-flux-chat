@@ -81,7 +81,7 @@ export function wrapText(text, color, points, maxWidth) {
   context.textAlign = 'left';
   context.globalAlpha = '1';
   context.shadowColor = '#787878';
-  context.shadowBlur = '5';
+  context.shadowBlur = '3';
   context.shadowOffsetX = '1';
   context.shadowOffsetY = '1';
 

@@ -4,14 +4,19 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
     <link rel="stylesheet" href="css/chatapp.css">
+    <style type="text/css">
+      body {
+        background-color: #19181B;
+      }
+    </style>
   </head>
   <body>
     <section id="react"></section>
     <script src="bower_components/react/react.js"></script>
     <script src="bower_components/threejs/build/three.js"></script>
     <script src="bower_components/d3/d3.js"></script>
+    <script src="bower_components/tweenjs/build/tween.min.js"></script>
     <script src="../subunit/dist/subunit.js"></script>
-    <script src="../subunit/demos/fonts/kai.js"></script>
     <script src="traceur/traceur.js"></script>
     <script src="traceur/bootstrap.js"></script>
     <script type="module">
@@ -37,6 +42,7 @@
       function animate() {
         // stats.update();
         // view.update();
+        TWEEN.update();
         globeView.root.node().rotation.y += 0.02;
 
         requestAnimationFrame(animate);
