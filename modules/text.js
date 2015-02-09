@@ -32,6 +32,8 @@ export function makeSprite(text, color, points) {
 
 export function wrapText(text, color, points, maxWidth) {
 
+  text = text.length > 140 ? text.slice(0,140) + "...": text;
+
   var canvas = d3.select("body").append("canvas")
     .style("display", "none");
 
@@ -48,11 +50,9 @@ export function wrapText(text, color, points, maxWidth) {
   });
 
   context = canvas.node().getContext("2d");
-  context.font = "normal " + points + "pt helvetica";
-  context.textBaseline = "bottom";
-  context.fillStyle = color;
+  context.font = "normal normal " + points + "px helvetica, arial";
 
-  var line  = "", lines = [], words = text.split(" ")
+  var line  = "", lines = [], words = text.split(" ");
 
   for(var n = 0; n < words.length; n++) {
 
@@ -71,14 +71,19 @@ export function wrapText(text, color, points, maxWidth) {
   lines.push([line, pad, total]);
 
   canvas.attr({ // RESIZE THEN DRAW
-    height: total
+    height: total + 50
   });
 
   context = canvas.node().getContext("2d");
-  // context.scale(2,2)
-  context.font = "normal " + points + "pt helvetica";
-  context.textBaseline = "bottom";
-  context.fillStyle = color;
+  context.fillStyle = color; 
+  context.font = "normal normal " + points + "px helvetica, arial";
+  context.textBaseline = 'bottom';
+  context.textAlign = 'left';
+  context.globalAlpha = '1';
+  context.shadowColor = '#787878';
+  context.shadowBlur = '5';
+  context.shadowOffsetX = '1';
+  context.shadowOffsetY = '1';
 
   for (var i = 0; i < lines.length; i++) {
     context.fillText(lines[i][0], lines[i][1], lines[i][2]);
@@ -86,6 +91,9 @@ export function wrapText(text, color, points, maxWidth) {
 
   texture = new THREE.Texture(canvas.node());
   texture.needsUpdate = true;
+
+  // FOR DEBUGGING _ LOADS THE PNG INTO "RESOURCES" IN DEV TOOLS
+  // var image = new THREE.ImageUtils.loadTexture(canvas.node().toDataURL());
 
   canvas.remove();
 

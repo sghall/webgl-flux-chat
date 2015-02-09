@@ -32,18 +32,18 @@ export var MessageSection = React.createClass({
   },
   render: function() {
     var messageListItems = this.state.messages.map(getMessageListItem);
-    return React.createElement("div", {className: "message-section"}, 
-      React.createElement("h3", {className: "message-thread-heading"}, this.state.thread.name), 
-      React.createElement("ul", {className: "message-list", ref: "messageList"}, messageListItems), 
-      React.createElement(MessageComposer, null)
-    );
+    // return React.createElement("div", {className: "message-section"}, 
+    //   React.createElement("h3", {className: "message-thread-heading"}, this.state.thread.name), 
+    //   React.createElement("ul", {className: "message-list", ref: "messageList"}, messageListItems), 
+      return React.createElement(MessageComposer, null)
+    // );
   },
   componentDidUpdate: function() {
     this._scrollToBottom();
   },
   _scrollToBottom: function() {
-    var ul = this.refs.messageList.getDOMNode();
-    ul.scrollTop = ul.scrollHeight;
+    // var ul = this.refs.messageList.getDOMNode();
+    // ul.scrollTop = ul.scrollHeight;
   },
   _onChange: function() {
     this.setState(getStateFromStores());
