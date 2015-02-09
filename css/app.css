@@ -1,6 +1,7 @@
 body {
   background-color: #CDD2D3;
-  ;
+  font-family: helvetica, arial;
+  color: #343838;
 }
 
 #react {
@@ -17,4 +18,11 @@ body {
   height: 50px;
   margin: auto;
   width: 50%;
+}
+
+#info {
+  position: absolute;
+  left: 15px;
+  top: 0px;
+  z-index: 1;
 }
