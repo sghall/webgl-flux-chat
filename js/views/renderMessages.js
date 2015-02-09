@@ -16,7 +16,7 @@ export function renderMessages() {
   messages.each(function (d, i) {
     new TWEEN.Tween(this.position)
       .easing(TWEEN.Easing.Cubic.InOut)
-      .to({y: 375 - (i * 120)}, 400)
+      .to({y: 325 - (i * 120)}, 400)
       .start();
   });
 
@@ -25,7 +25,7 @@ export function renderMessages() {
     .attr("tags", "message node")
     .each(function (d, i) {
       this.rotation.set(0, 0, Math.PI);
-      this.position.set(210, 375 - (i * 120), 0);
+      this.position.set(210, 325 - (i * 120), 0);
       this.scale.set(0.75, 0.01, 0.75);
 
       new TWEEN.Tween(this.rotation)
