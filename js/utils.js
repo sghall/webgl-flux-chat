@@ -93,3 +93,42 @@ export var actionTypes = {
   RECEIVE_RAW_CREATED_MESSAGE: 'RECEIVE_RAW_CREATED_MESSAGE',
   RECEIVE_RAW_MESSAGES: 'RECEIVE_RAW_MESSAGES'
 };
+
+export function makeSprite(text, color, points) {
+  var canvas, texture, context, textWidth;
+
+  var pad = points * 0.5;
+
+  canvas = d3.select("body").append("canvas")
+    .style("display", "none");
+
+  context = canvas.node().getContext("2d");
+  context.font = "normal normal " + points + "px helvetica, arial";
+
+  textWidth = context.measureText(text).width + pad;
+  canvas.attr({width: textWidth, height: points + pad});
+
+  context = canvas.node().getContext("2d");
+  context.fillStyle = color; 
+  context.font = "normal normal " + points + "px helvetica, arial";
+  context.textBaseline = 'middle';
+  context.textAlign = 'center';
+  context.globalAlpha = '1';
+  context.shadowColor = '#787878';
+  context.shadowBlur = '3';
+  context.shadowOffsetX = '1';
+  context.shadowOffsetY = '1';
+
+  context.fillText(text, textWidth / 2, (points + pad) / 2);
+
+  texture = new THREE.Texture(canvas.node());
+  texture.needsUpdate = true;
+
+  canvas.remove();
+
+  return { 
+    map: texture, 
+    width: textWidth, 
+    height: points + pad
+  };
+}
