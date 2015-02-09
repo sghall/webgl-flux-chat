@@ -1,7 +1,7 @@
 import { dispatcher } from '../dispatcher';
-import { messageStore } from '../stores/message';
-import { threadStore } from '../stores/thread';
-import { actionTypes } from '../actionTypes';
+import { messageStore } from '../stores/messageStore';
+import { threadStore } from '../stores/threadStore';
+import { actionTypes } from '../utils';
 
 export var unreadStore = SubUnit.createStore({
   getCount: function() {

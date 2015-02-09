@@ -1,18 +1,6 @@
 import { scene } from '../scene';
-import { messageStore } from '../stores/message';
-import { threadStore } from '../stores/thread';
 
-function getStateFromStores() {
-  return {
-    messages: messageStore.getAllForCurrentThread(),
-    thread: threadStore.getCurrent()
-  };
-}
-
-export var globeView = SubUnit.createView(scene, {
-  getInitialState: function () {
-    return getStateFromStores();
-  },
+export var spheresView = SubUnit.createView(scene, {
   render: function () {
     this.root.node().position.set(0, 0, 500)
 
@@ -31,7 +19,3 @@ export var globeView = SubUnit.createView(scene, {
       })
   }
 });
-
-function onStoreUpdate() {
-  view.setState(getStateFromStores());
-}

@@ -1,4 +1,4 @@
-import { messageActions } from '../actions/message';
+import { messageActions } from '../actions/messageActions';
 
 var ENTER_KEY_CODE = 13;
 

@@ -1,7 +1,7 @@
-import { serverActions } from '../actions/server';
+import { serverActions } from '../actions/serverActions';
 import { dispatcher } from '../dispatcher';
-import { messageStore } from '../stores/message';
-import { actionTypes } from '../actionTypes';
+import { messageStore } from '../stores/messageStore';
+import { actionTypes } from '../utils';
 
 export var messageActions = {
   createMessage: function(text) {

@@ -1,14 +1,13 @@
 import { dispatcher } from '../dispatcher';
-import { utils } from '../utils';
-import { threadStore } from '../stores/thread';
-import { actionTypes } from '../actionTypes';
+import { threadStore } from '../stores/threadStore';
+import { convertRawMessage, actionTypes } from '../utils';
 
 var _messages = {};
 
 function _addMessages(rawMessages) {
   rawMessages.forEach(function (message) {
     if (!_messages[message.id]) {
-      _messages[message.id] = utils.convertRawMessage(
+      _messages[message.id] = convertRawMessage(
         message,
         threadStore.getCurrentID()
       );

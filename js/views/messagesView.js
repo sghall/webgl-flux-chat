@@ -1,8 +1,7 @@
 import { scene } from '../scene';
-import { messageStore } from '../stores/message';
-import { threadStore } from '../stores/thread';
-
-import { renderMessages } from './render'
+import { messageStore } from '../stores/messageStore';
+import { threadStore } from '../stores/threadStore';
+import { renderMessages } from './renderMessages';
 
 function getStateFromStores() {
   return {
@@ -11,7 +10,7 @@ function getStateFromStores() {
   };
 }
 
-export var view = SubUnit.createView(scene, {
+export var messagesView = SubUnit.createView(scene, {
   getInitialState: function () {
     return getStateFromStores();
   },
@@ -27,5 +26,5 @@ export var view = SubUnit.createView(scene, {
 });
 
 function onStoreUpdate() {
-  view.setState(getStateFromStores());
+  messagesView.setState(getStateFromStores());
 }

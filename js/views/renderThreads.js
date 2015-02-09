@@ -1,4 +1,4 @@
-import { makeSprite, wrapText } from '../text';
+import { wrapText } from '../utils';
 
 var messageGeometry = new THREE.BoxGeometry(100, 30, 5);
 
@@ -8,7 +8,7 @@ var color = SubUnit.cache(10, function (color) {
 
 var text = SubUnit.cache(100, wrapText);
 
-export function renderMessages() {
+export function renderThreads() {
   var msgWidth = 1800;
 
   var data = this.state;
@@ -35,7 +35,7 @@ export function renderMessages() {
     .each(function (d, i) {
       this.rotation.set(0, 0, Math.PI);
       this.position.set(200, 375 - (i * 120), 0);
-      this.scale.set(0.75, 0.02, 0.75);
+      this.scale.set(0.75, 0.01, 0.75);
 
       new TWEEN.Tween(this.rotation)
         .easing(TWEEN.Easing.Cubic.InOut)

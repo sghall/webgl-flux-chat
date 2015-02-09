@@ -3,15 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-    <link rel="stylesheet" href="css/chatapp.css">
-    <style type="text/css">
-      body {
-        background-color: #19181B;
-      }
-    </style>
+    <link rel="stylesheet" type="text/css" href="css/app.css">
   </head>
   <body>
-    <section id="react"></section>
+    <div id="react"></div>
     <script src="bower_components/react/react.js"></script>
     <script src="bower_components/threejs/build/three.js"></script>
     <script src="bower_components/d3/d3.js"></script>
@@ -20,16 +15,22 @@
     <script src="traceur/traceur.js"></script>
     <script src="traceur/bootstrap.js"></script>
     <script type="module">
-      import { ChatApp } from './modules/components/ChatApp.react';
-      import { exampleData } from './modules/exampleData';
-      import { serverActions } from './modules/actions/server';
-      import { view } from './modules/views/message';
-      import { globeView } from './modules/views/globe';
-      import { scene, camera, renderer } from './modules/scene';
-      // setTimeout(function () {
-      //   view.remove();
-      // }, 3000)
+      import { MessageComposer } from './js/views/MessageComposer.react';
+      import { exampleData } from './data/exampleData';
+      import { serverActions } from './js/actions/serverActions';
+      import { messagesView } from './js/views/messagesView';
+      import { spheresView } from './js/views/spheresView';
+      import { scene, camera, renderer } from './js/scene';
 
+      exampleData.init(); // load example data into localstorage
+
+      var rawMessages = JSON.parse(localStorage.getItem('messages'));
+      serverActions.receiveAll(rawMessages);
+
+      React.render(
+        React.createElement(MessageComposer, null),
+        document.getElementById('react')
+      );
 
       window.addEventListener('resize', onWindowResize, false);
 
@@ -40,30 +41,14 @@
       }
 
       function animate() {
-        // stats.update();
-        // view.update();
         TWEEN.update();
-        globeView.root.node().rotation.y += 0.02;
+        spheresView.root.node().rotation.y += 0.02;
 
         requestAnimationFrame(animate);
         renderer.render(scene, camera);
       }
 
       animate();
-
-
-      console.log("imported view", view);
-
-      exampleData.init(); // load example data into localstorage
-
-      var rawMessages = JSON.parse(localStorage.getItem('messages'));
-      serverActions.receiveAll(rawMessages);
-
-      React.render(  // No JSX here.
-        React.createElement(ChatApp, null),
-        document.getElementById('react')
-      );
-
     </script>
   </body>
 </html>

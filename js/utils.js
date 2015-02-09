@@ -1,32 +1,12 @@
-export function makeSprite(text, color, points) {
-  var canvas, texture, context, textWidth;
 
-  var pad = points * 0.5;
-
-  canvas = d3.select("body").append("canvas")
-    .style("display", "none");
-
-  context = canvas.node().getContext("2d");
-  context.font = "normal " + points + "pt helvetica";
-
-  textWidth = context.measureText(text).width + pad;
-  canvas.attr({width: textWidth, height: points + pad});
-
-  context.font = "normal " + points + "pt helvetica";
-  context.textAlign    = "center";
-  context.textBaseline = "middle";
-  context.fillStyle    = color;
-  context.fillText(text, textWidth / 2, (points + pad) / 2);
-  
-  texture = new THREE.Texture(canvas.node());
-  texture.needsUpdate = true;
-
-  canvas.remove();
-
-  return { 
-    map: texture, 
-    width: textWidth, 
-    height: points + pad
+export function convertRawMessage(rawMessage, currentThreadID) {
+  return {
+    id: rawMessage.id,
+    threadID: rawMessage.threadID,
+    authorName: rawMessage.authorName,
+    date: new Date(rawMessage.timestamp),
+    text: rawMessage.text,
+    isRead: rawMessage.threadID === currentThreadID
   };
 }
 
@@ -70,7 +50,7 @@ export function wrapText(text, color, points, maxWidth) {
 
   lines.push([line, pad, total]);
 
-  canvas.attr({ // RESIZE THEN DRAW
+  canvas.attr({
     height: total + 50
   });
 
@@ -92,9 +72,6 @@ export function wrapText(text, color, points, maxWidth) {
   texture = new THREE.Texture(canvas.node());
   texture.needsUpdate = true;
 
-  // FOR DEBUGGING _ LOADS THE PNG INTO "RESOURCES" IN DEV TOOLS
-  // var image = new THREE.ImageUtils.loadTexture(canvas.node().toDataURL());
-
   canvas.remove();
 
   return { 
@@ -103,3 +80,10 @@ export function wrapText(text, color, points, maxWidth) {
     height: total + (pad * 2)
   };
 }
+
+export var actionTypes = {
+  CLICK_THREAD: 'CLICK_THREAD',
+  CREATE_MESSAGE: 'CREATE_MESSAGE',
+  RECEIVE_RAW_CREATED_MESSAGE: 'RECEIVE_RAW_CREATED_MESSAGE',
+  RECEIVE_RAW_MESSAGES: 'RECEIVE_RAW_MESSAGES'
+};

@@ -1,6 +1,5 @@
 import { dispatcher } from '../dispatcher';
-import { utils } from '../utils';
-import { actionTypes } from '../actionTypes';
+import { convertRawMessage, actionTypes } from '../utils';
 
 var _currentID = null;
 var _threads = {};
@@ -16,7 +15,7 @@ export var threadStore = SubUnit.createStore({
       _threads[threadID] = {
         id: threadID,
         name: message.threadName,
-        lastMessage: utils.convertRawMessage(message, _currentID)
+        lastMessage: convertRawMessage(message, _currentID)
       };
     }, this);
 

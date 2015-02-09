@@ -1,5 +1,5 @@
 import { dispatcher } from '../dispatcher';
-import { actionTypes } from '../actionTypes';
+import { actionTypes } from '../utils';
 
 export var serverActions = {
   receiveAll: function(rawMessages) {

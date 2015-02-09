@@ -1,0 +1,19 @@
+body {
+  background-color: #19181B;
+}
+
+#react {
+  background: none repeat scroll 0 0 transparent;
+  bottom: 0;
+  position: fixed;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.message-composer {
+  background: none repeat scroll 0 0 white;
+  height: 50px;
+  margin: auto;
+  width: 50%;
+}
