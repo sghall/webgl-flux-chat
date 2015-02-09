@@ -16,6 +16,7 @@
   "dependencies": {
     "react": "~0.12.2",
     "d3": "~3.5.3",
-    "subunit": "~0.2.3"
+    "subunit": "~0.2.3",
+    "tweenjs": "*"
   }
 }
