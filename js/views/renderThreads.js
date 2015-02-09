@@ -1,10 +1,10 @@
 import { wrapText, color, text } from '../utils';
+import { threadActions } from '../actions/threadActions';
 
 var threadGeometry = new THREE.BoxGeometry(100, 30, 5);
 
 export function renderThreads() {
 
-  console.log("threads!!", this.state);
   var msgWidth = 800;
 
   var data = this.state;
@@ -102,8 +102,12 @@ export function renderThreads() {
     .each(function (d, i) {
       this.position.set(0, 0, 495);
       this.scale.set(4.9, 4.8, 1);
+    })
+    .on('click', function (event, d, i) {
+       threadActions.clickThread(d.id);
     });
 
-  threads.exit().remove();
+  this.events['click'] = this.root.selectAll("backing.inner")[0];
 
+  threads.exit().remove();
 }
