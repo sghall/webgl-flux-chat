@@ -25,18 +25,18 @@ export function renderMessages() {
     .attr("tags", "message node")
     .each(function (d, i) {
       this.rotation.set(0, 0, Math.PI);
-      this.position.set(200, 375 - (i * 120), 0);
+      this.position.set(210, 375 - (i * 120), 0);
       this.scale.set(0.75, 0.01, 0.75);
 
       new TWEEN.Tween(this.rotation)
         .easing(TWEEN.Easing.Cubic.InOut)
-        .to({z: 0}, 400)
+        .to({z: 0}, 350)
         .start();
 
       new TWEEN.Tween(this.scale)
         .easing(TWEEN.Easing.Cubic.InOut)
-        .delay(400)
-        .to({y: 0.75}, 400)
+        .delay(350)
+        .to({y: 0.75}, 350)
         .start();
     });
 
@@ -56,7 +56,7 @@ export function renderMessages() {
   nodes.append("mesh")
     .attr("tags", "message author")
     .each(function (d) {
-      var image = text(d.authorName, "#66c", 31, msgWidth);
+      var image = text(d.authorName, "#005F6B", 31, msgWidth);
       this.material = new THREE.MeshBasicMaterial({
         map: image.map, 
         transparent: true
@@ -68,7 +68,7 @@ export function renderMessages() {
   nodes.append("mesh")
     .attr("tags", "message time")
     .each(function (d) {
-      var image = text(d3.time.format("%X %p")(d.date), "#241F2B", 30, msgWidth);
+      var image = text(d3.time.format("%X %p")(d.date), "#008C9E", 30, msgWidth);
       this.material = new THREE.MeshBasicMaterial({
         map: image.map, 
         transparent: true
@@ -81,7 +81,7 @@ export function renderMessages() {
   nodes.append("mesh")
     .attr("tags", "message backing outer")
     .attr("geometry", messageGeometry)
-    .attr("material", color('#483C58'))
+    .attr("material", color('#FFF7E6'))
     .each(function (d, i) {
       this.position.set(0, 0, 490);
       this.scale.set(11, 5, 1);

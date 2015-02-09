@@ -15,7 +15,7 @@ export function renderThreads() {
   threads.selectAll("backing.inner")
     .attr("material", function (d) {
       if (d.id === data.currentThreadID) {
-        return color('#ccf');
+        return color('#93A0A2');
       }
       return color("#fff");
     });
@@ -37,13 +37,13 @@ export function renderThreads() {
 
       new TWEEN.Tween(this.rotation)
         .easing(TWEEN.Easing.Cubic.InOut)
-        .to({z: 0}, 400)
+        .to({z: 0}, 350)
         .start();
 
       new TWEEN.Tween(this.scale)
         .easing(TWEEN.Easing.Cubic.InOut)
-        .delay(400)
-        .to({y: 0.75}, 400)
+        .delay(350)
+        .to({y: 0.75}, 350)
         .start();
     });
 
@@ -63,7 +63,7 @@ export function renderThreads() {
   nodes.append("mesh")
     .attr("tags", "thread name")
     .each(function (d) {
-      var image = text(d.name, "#66c", 31, msgWidth);
+      var image = text(d.name, "#005F6B", 31, msgWidth);
       this.material = new THREE.MeshBasicMaterial({
         map: image.map, 
         transparent: true
@@ -76,7 +76,7 @@ export function renderThreads() {
     .attr("tags", "thread time")
     .each(function (d) {
       var time = d3.time.format("%X %p")(d.lastMessage.date);
-      var image = text(time, "#241F2B", 30, msgWidth);
+      var image = text(time, "#008C9E", 30, msgWidth);
       this.material = new THREE.MeshBasicMaterial({
         map: image.map, 
         transparent: true
@@ -89,7 +89,7 @@ export function renderThreads() {
   nodes.append("mesh")
     .attr("tags", "thread backing outer")
     .attr("geometry", threadGeometry)
-    .attr("material", color('#483C58'))
+    .attr("material", color('#FFF7E6'))
     .each(function (d, i) {
       this.position.set(0, 0, 490);
       this.scale.set(5, 5, 1);
@@ -101,7 +101,7 @@ export function renderThreads() {
     .attr("material", color('#FFF'))
     .each(function (d, i) {
       this.position.set(0, 0, 495);
-      this.scale.set(4.9, 4.8, 1);
+      this.scale.set(4.95, 4.8, 1);
     })
     .on('click', function (event, d, i) {
        threadActions.clickThread(d.id);
