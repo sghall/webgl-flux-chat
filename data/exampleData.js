@@ -5,58 +5,66 @@ export var exampleData = {
       {
         id: 'm_1',
         threadID: 't_1',
-        threadName: 'Jing and Bill',
-        authorName: 'Bill',
-        text: 'Hey Jing, want to give a Flux talk at ForwardJS?',
+        threadName: 'Butch and Vincent',
+        authorName: 'Butch',
+        text: 'You lookin at something, friend?',
         timestamp: Date.now() - 99999
       },
       {
         id: 'm_2',
         threadID: 't_1',
-        threadName: 'Jing and Bill',
-        authorName: 'Bill',
-        text: 'Seems like a pretty cool conference.',
+        threadName: 'Butch and Vincent',
+        authorName: 'Vincent',
+        text: "You ain't my friend, Palooka",
         timestamp: Date.now() - 89999
       },
       {
         id: 'm_3',
         threadID: 't_1',
-        threadName: 'Jing and Bill',
-        authorName: 'Jing',
-        text: 'Sounds good.  Will they be serving dessert?',
+        threadName: 'Butch and Vincent',
+        authorName: 'Butch',
+        text: "What's that?",
         timestamp: Date.now() - 79999
       },
       {
         id: 'm_4',
         threadID: 't_2',
-        threadName: 'Dave and Bill',
-        authorName: 'Bill',
-        text: 'Hey Dave, want to get a beer after the conference?',
+        threadName: 'Jules and Vincent',
+        authorName: 'Jules',
+        text: 'We should have shotguns for this kind of deal. IMHO.',
         timestamp: Date.now() - 69999
       },
       {
         id: 'm_5',
         threadID: 't_2',
-        threadName: 'Dave and Bill',
-        authorName: 'Dave',
-        text: 'Totally!  Meet you at the hotel bar.',
+        threadName: 'Jules and Vincent',
+        authorName: 'Vincent',
+        text: 'How many up there?',
         timestamp: Date.now() - 59999
       },
       {
         id: 'm_6',
-        threadID: 't_3',
-        threadName: 'Functional Heads',
-        authorName: 'Bill',
-        text: 'Hey Brian, are you going to be talking about functional stuff?',
+        threadID: 't_2',
+        threadName: 'Jules and Vincent',
+        authorName: 'Jules',
+        text: 'Three or four.',
         timestamp: Date.now() - 49999
       },
       {
         id: 'm_7',
         threadID: 't_3',
-        threadName: 'Bill and Brian',
-        authorName: 'Brian',
-        text: 'At ForwardJS?  Yeah, of course.  See you there!',
+        threadName: 'Vincent and Lance',
+        authorName: 'Vincent',
+        text: "OMG. Lance! I'm in big fuckin' trouble, man. I'm coming to your house.",
         timestamp: Date.now() - 39999
+      },
+      {
+        id: 'm_8',
+        threadID: 't_3',
+        threadName: 'Vincent and Lance',
+        authorName: 'Lance',
+        text: "Whoa. Whoa. Hold your horses, man. What's the problem?",
+        timestamp: Date.now() - 29999
       }
     ]));
   }
